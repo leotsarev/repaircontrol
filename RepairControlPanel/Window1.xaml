@@ -1,0 +1,11 @@
+﻿<Window x:Class="RepairControlPanel.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Управление Коробочками" Height="562" Width="486" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Grid>
+        <Label Height="28" HorizontalAlignment="Left" Margin="16,21,0,0" Name="portLabel" VerticalAlignment="Top" Width="120">Порт:</Label>
+        <ScrollViewer Margin="16,63,10,10" Name="unitsScrollViewer">
+            <WrapPanel Name="unitsStackPanel" />
+        </ScrollViewer>
+        <Label Content="Уровень энергии:" Height="28" HorizontalAlignment="Left" Margin="182,21,0,0" Name="energyLabel" VerticalAlignment="Top" Width="270" />
+    </Grid>
+</Window>
