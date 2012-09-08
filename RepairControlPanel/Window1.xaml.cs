@@ -37,7 +37,11 @@ namespace RepairControlPanel
             Timer.Start();
 
             var log = new LogWindow();
-           log.Show();
+            if (Settings.Default.EnableLogWindow)
+            {
+                log.Show();
+            }
+            Log.LogAllPackets = Settings.Default.LogAllPackets;
         }
 
         private void MakeKill()
@@ -55,7 +59,7 @@ namespace RepairControlPanel
                 return;
             }
             var unitNum = rnd.Next(0, units.Length - 1);
-            units[unitNum].BreakJumper();
+            units[unitNum].BreakJumper(null);
         }
 
         private void UpdateEnergyLabel()

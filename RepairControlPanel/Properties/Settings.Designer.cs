@@ -121,5 +121,23 @@ namespace RepairControlPanel.Properties {
                 return ((byte)(this["MaxRepairDelaySecs"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableLogWindow {
+            get {
+                return ((bool)(this["EnableLogWindow"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogAllPackets {
+            get {
+                return ((bool)(this["LogAllPackets"]));
+            }
+        }
     }
 }
