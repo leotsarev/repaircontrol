@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using RepairControl;
 using RepairControlPanel.Properties;
@@ -31,10 +32,28 @@ namespace RepairControlPanel
             MyUnit.RefreshNow();
         }
 
-        private void BreakJamper_Click(object sender, RoutedEventArgs e)
+        private void BreakJumper_Click(object sender, RoutedEventArgs e)
         {
-            MyUnit.BreakJumper();
-            UpdateStatus();
+            try
+            {
+                var jumperValue = GetTargetJumperValue();
+                MyUnit.BreakJumper(jumperValue);
+                UpdateStatus();
+            }
+            catch (InvalidCastException)
+            {
+                MessageBox.Show("Неверный формат строки!");
+            }
+        }
+
+        private byte? GetTargetJumperValue()
+        {
+            var targetJumperValue = JumperTargetValueTextBox.Text.Trim();
+
+            return targetJumperValue.Length == 0 
+                ? (byte?) null 
+                : Convert.ToByte(targetJumperValue, 2);
+            ;
         }
 
         private void BreakResistor_Click(object sender, RoutedEventArgs e)

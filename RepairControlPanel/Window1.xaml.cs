@@ -37,7 +37,7 @@ namespace RepairControlPanel
             Timer.Start();
 
             var log = new LogWindow();
-           // log.Show();
+           log.Show();
         }
 
         private void MakeKill()
@@ -89,7 +89,7 @@ namespace RepairControlPanel
 
         private void ConnectToCom(string comPortName)
         {
-            Connector = new ComPortConnector(comPortName, Settings.Default.DefaultDifficulty, Settings.Default.EnableDataSave ? (IUnitSavedData)new UnitSavedData() : new NullUnitSavedData(), Settings.Default.EnableAutoRepair,  Settings.Default.AutoRepairTreshold);
+            Connector = new ComPortConnector(comPortName, Settings.Default.DefaultDifficulty, Settings.Default.EnableDataSave ? (IUnitSavedData)new UnitSavedData() : new NullUnitSavedData(), Settings.Default.EnableAutoRepair,  Settings.Default.AutoRepairTreshold, Settings.Default.MinRepairDelaySecs, Settings.Default.MaxRepairDelaySecs);
             for (byte i = 1; i < Settings.Default.MaxAddress; i++)
             {
                 AddUnit(i);

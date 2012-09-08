@@ -79,7 +79,7 @@ namespace RepairControlPanel.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
         public string ComPortName {
             get {
                 return ((string)(this["ComPortName"]));
@@ -101,6 +101,24 @@ namespace RepairControlPanel.Properties {
         public int KillCoef {
             get {
                 return ((int)(this["KillCoef"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte MinRepairDelaySecs {
+            get {
+                return ((byte)(this["MinRepairDelaySecs"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte MaxRepairDelaySecs {
+            get {
+                return ((byte)(this["MaxRepairDelaySecs"]));
             }
         }
     }

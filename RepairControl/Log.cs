@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace RepairControl
 {
@@ -14,7 +15,7 @@ namespace RepairControl
         }
         public static void WritePacket(string h, byte[] packet)
         {
-           // Write(packet.Select(b => b.ToString("X2")).ToList().Aggregate(h, (a, b) => a + " " + b));
+           Write(packet.Select(b => b.ToString("X2")).ToList().Aggregate(h, (a, b) => a + " " + b));
         }
     }
 }

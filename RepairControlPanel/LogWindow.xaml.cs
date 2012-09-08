@@ -37,6 +37,7 @@ namespace RepairControlPanel
             lock (Log.Items)
             {
                 textBox1.Text += "\n" + string.Join("\n", Log.Items.ToArray());
+                textBox1.ScrollToEnd();
                 Log.Items.Clear();
             }
         }

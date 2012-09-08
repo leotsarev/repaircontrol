@@ -12,7 +12,7 @@ namespace RepairControl
         private readonly IUnitSavedData _savedData;
         private readonly byte _defaultDifficulty;
 
-        public ComPortConnector(string portName, byte defaultDifficulty, IUnitSavedData savedData, bool autoRestore, int autoRepairThreshold)
+        public ComPortConnector(string portName, byte defaultDifficulty, IUnitSavedData savedData, bool autoRestore, int autoRepairThreshold, byte minRepairDelaySecs, byte maxRepairDelaySecs)
         {
             _defaultDifficulty = defaultDifficulty;
             Log.Write("Port: " + portName);
@@ -41,6 +41,8 @@ namespace RepairControl
             AutoRepairThreshold = autoRepairThreshold;
             AutoRestore = autoRestore;
 
+            MinRepairDelaySecs = minRepairDelaySecs;
+            MaxRepairDelaySecs = maxRepairDelaySecs;
         }
 
 
@@ -51,7 +53,7 @@ namespace RepairControl
 
         private readonly List<byte> _buffer = new List<byte>();
 
-        void PortDataReceived(object sender, SerialDataReceivedEventArgs e)
+         void PortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
             {
@@ -159,7 +161,7 @@ namespace RepairControl
         public void Set(UnitStatusData savedData)
         {
             _savedData[savedData.Address] = savedData;
-            Send(Command.CreateSetFromSavedData(savedData, _defaultDifficulty));
+            Send(Command.CreateSetFromSavedData(savedData, _defaultDifficulty, MinRepairDelaySecs, MaxRepairDelaySecs));
         }
 
         public UnitStatusData GetSaved(byte address)
@@ -170,5 +172,9 @@ namespace RepairControl
         public bool AutoRestore { get; private set; }
 
         public int AutoRepairThreshold { get; private set; }
+
+        public byte MinRepairDelaySecs { get; private set; }
+
+        public byte MaxRepairDelaySecs { get; private set; }
     }
 }

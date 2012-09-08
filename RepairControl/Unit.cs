@@ -154,8 +154,9 @@ namespace RepairControl
 
         private readonly int[] ResistorNominals = new[] {1000, 2000, 5100, 6800, 12000, 18000, 15000, 51000};
 
-        public void BreakJumper()
+        public void BreakJumper(byte? jumperValue)
         {
+            JumperSettingValue = jumperValue;
             JumperBreakPending = true;
         }
 
@@ -253,6 +254,7 @@ namespace RepairControl
         }
 
         private bool JumperBreakPending, ResistorBreakPending;
+        private byte? JumperSettingValue;
         private static readonly TimeSpan DelayUntilReset = new TimeSpan(0, 0, 2);
         private int? _metroModeRestore;
 
@@ -278,7 +280,7 @@ namespace RepairControl
             }
             if (JumperBreakPending)
             {
-                RequiredJumper = GenerateJumperValue();
+                RequiredJumper = JumperSettingValue ?? GenerateJumperValue();
                 JumperBreakPending = false;
             }
             if (ResistorBreakPending)

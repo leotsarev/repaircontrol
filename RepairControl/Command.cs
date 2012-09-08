@@ -75,7 +75,7 @@ namespace RepairControl
             [Test]
             public void ParseGetCommandWithExtra()
             {
-                List<byte> buffer = _getCommand;
+                var buffer = _getCommand;
                 buffer.Add(0);
                 var command = TryParseCommand(buffer);
                 Assert.AreNotEqual(null, command);
@@ -96,8 +96,10 @@ namespace RepairControl
         private readonly byte _digit;
         private readonly byte _dific;
         private readonly byte _status;
+        private readonly byte _minRepairDelaySecs;
+        private readonly byte _maxRepairDelaySecs;
 
-        private Command(byte addr, CommandType cmdType, byte analog = 0, byte digit = 0, byte dific = 0, byte status = 0)
+        private Command(byte addr, CommandType cmdType, byte analog = 0, byte digit = 0, byte dific = 0, byte status = 0, byte minRepairDelaySecs = 0, byte maxRepairDelaySecs = 0)
         {
             _addr = addr;
             Sender = ServerAddress;
@@ -106,6 +108,8 @@ namespace RepairControl
             _digit = digit;
             _dific = dific;
             _status = status;
+            _minRepairDelaySecs = minRepairDelaySecs;
+            _maxRepairDelaySecs = maxRepairDelaySecs;
         }
 
         private Command(IList<byte> command)
@@ -119,6 +123,8 @@ namespace RepairControl
                 _digit = command[4];
                 _dific = command[5];
                 _status = command[6];
+                _minRepairDelaySecs = command[7];
+                _maxRepairDelaySecs = command[8];
             }
             else
             {
@@ -139,6 +145,8 @@ namespace RepairControl
                 buf[4] = _digit;
                 buf[5] = _dific;
                 buf[6] = _status;
+                buf[7] = _minRepairDelaySecs;
+                buf[8] = _maxRepairDelaySecs;
             }
             var crc = buf.Calculate(len);
             buf[len + 1] = (byte) (crc >> 8);
@@ -148,7 +156,7 @@ namespace RepairControl
 
         private static int GetCmdLen(CommandType commandType)
         {
-            return commandType == CommandType.Set ? 7 : 3;
+            return commandType == CommandType.Set ? 9 : 3;
         }
 
         public static Command CreateGet(byte address)
@@ -189,9 +197,10 @@ namespace RepairControl
             return (ushort) ((buffer[cmdLen + 2-1] << 8) | buffer[cmdLen + 2-2]);
         }
 
-        private static Command CreateSet(byte jvalue, byte rvalue, byte dificulty, byte address)
+        private static Command CreateSet(byte jvalue, byte rvalue, byte defaultDifficulty, byte address, byte minRepairDelaySecs, byte maxRepairDelaySecs)
         {
-            return new Command(address, CommandType.Set, rvalue, jvalue, dificulty);
+            return new Command(address, CommandType.Set, rvalue, jvalue, defaultDifficulty, minRepairDelaySecs, maxRepairDelaySecs);
+            
         }
 
         public void ApplyToUnit(Unit u)
@@ -224,10 +233,10 @@ namespace RepairControl
             return CreateGet(0xF0);
         }
 
-        public static Command CreateSetFromSavedData(UnitStatusData unitStatusData, byte defaultDifficulty)
+        public static Command CreateSetFromSavedData(UnitStatusData unitStatusData, byte defaultDifficulty, byte minRepairDelaySecs, byte maxRepairDelaySecs)
         {
             return CreateSet(unitStatusData.Jvalue, unitStatusData.Rvalue,
-                                     defaultDifficulty, unitStatusData.Address);
+                         defaultDifficulty, unitStatusData.Address, minRepairDelaySecs, maxRepairDelaySecs);
         }
     }
 }

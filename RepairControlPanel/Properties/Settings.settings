@@ -21,13 +21,19 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ComPortName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">COM2</Value>
+      <Value Profile="(Default)">COM1</Value>
     </Setting>
     <Setting Name="EnergyLevel" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="KillCoef" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="MinRepairDelaySecs" Type="System.Byte" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MaxRepairDelaySecs" Type="System.Byte" Scope="Application">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
