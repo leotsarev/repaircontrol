@@ -123,8 +123,8 @@ namespace RepairControl
                 _digit = command[4];
                 _dific = command[5];
                 _status = command[6];
-                _minRepairDelaySecs = command[7];
-                _maxRepairDelaySecs = command[8];
+//                _minRepairDelaySecs = command[7];   Don't set from devices!
+//                _maxRepairDelaySecs = command[8];
             }
             else
             {
@@ -199,7 +199,7 @@ namespace RepairControl
 
         private static Command CreateSet(byte jvalue, byte rvalue, byte defaultDifficulty, byte address, byte minRepairDelaySecs, byte maxRepairDelaySecs)
         {
-            return new Command(address, CommandType.Set, rvalue, jvalue, defaultDifficulty, minRepairDelaySecs, maxRepairDelaySecs);
+            return new Command(address, CommandType.Set, rvalue, jvalue, defaultDifficulty, 0, minRepairDelaySecs, maxRepairDelaySecs);
             
         }
 

@@ -34,8 +34,8 @@ namespace RepairControl
             Log.Write("Set handlers...");
             _port.DataReceived += PortDataReceived;
             _port.ErrorReceived += PortErrorReceived;
-           // Log.Write("Set RTS_TOGGLE...");
-            //Port.SetDcb(12, 3);
+            //Log.Write("Set RTS_TOGGLE...");
+            //_port.;
             Log.Write("Completed");
             _savedData = savedData;
             AutoRepairThreshold = autoRepairThreshold;
@@ -145,6 +145,7 @@ namespace RepairControl
                     throw new Exception("Write");
                 }
                 _port.Write(toSend, 0, toSend.Length);
+
             }
         }
 

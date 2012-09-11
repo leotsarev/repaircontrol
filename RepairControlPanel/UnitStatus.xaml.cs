@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using RepairControl;
 using RepairControlPanel.Properties;
+using System.Text.RegularExpressions;
 
 namespace RepairControlPanel
 {
@@ -50,10 +51,16 @@ namespace RepairControlPanel
         {
             var targetJumperValue = JumperTargetValueTextBox.Text.Trim();
 
-            return targetJumperValue.Length == 0 
-                ? (byte?) null 
-                : Convert.ToByte(targetJumperValue, 2);
-            ;
+            Regex _reg = new Regex("^[0-1]{8}", RegexOptions.None);
+            Match _mbin = _reg.Match(targetJumperValue);
+
+            if (_mbin.Success)
+                return targetJumperValue.Length == 0
+                    ? (byte?)null
+                    : Convert.ToByte(targetJumperValue, 2);
+            else
+                JumperTargetValueTextBox.Text = "ERROR";
+                return (byte?)null;
         }
 
         private void BreakResistor_Click(object sender, RoutedEventArgs e)
