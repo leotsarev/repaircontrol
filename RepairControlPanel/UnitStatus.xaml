@@ -14,11 +14,10 @@
             <Label Height="28" Name="ResistorValueLabel" Width="120"/>
             <Label Height="28" Name="label16" Width="120" Content=""/>
             <Button Height="23" Name="BreakResistor" Width="75" Click="BreakResistor_Click">Сломать</Button>
-            
             <Label Height="28" Name="label5" Width="80">Джамперы</Label>
             <Label Height="28" Name="label6" Width="120" Content="{Binding Path=JumpersStatusString}"/>
             <Label Height="28" Name="JumperValueLabel" Width="120" Content="" Visibility="Hidden"/>
-            <TextBox Name="JumperTargetValueTextBox" />
+            <TextBox Height="18" Name="JumperTargetValueTextBox" MaxLength="8"/>
             <Button Height="23" Name="BreakJamper" Width="75" Click="BreakJumper_Click">Сломать</Button>
         </UniformGrid>
     </GroupBox>

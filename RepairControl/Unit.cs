@@ -203,7 +203,7 @@ namespace RepairControl
             ResistorStatus = unitStatusInfo.ResistorStatus;
             //ResistorValueString = string.Format("{0:F1} /{1:F1} кОм", ResistorValueInOms,
             //                                    RequiredResistorInOms/1000.0);
-            ResistorValueString = string.Format("{0:F1} энергии", RequiredResistorInOms);
+            ResistorValueString = string.Format("{0:F1}", RequiredResistorInOms);
             JumperValueString = StatusInfo.JumperValue.ToBinString() + "/" + RequiredJumper.ToBinString();
             if (Connector.AutoRestore && ShouldBeRestoredForMetro())
             {
