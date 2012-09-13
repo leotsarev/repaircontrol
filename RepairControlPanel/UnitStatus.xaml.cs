@@ -55,12 +55,19 @@ namespace RepairControlPanel
             Match _mbin = _reg.Match(targetJumperValue);
 
             if (_mbin.Success)
-                return targetJumperValue.Length == 0
-                    ? (byte?)null
-                    : Convert.ToByte(targetJumperValue, 2);
+            {
+                if (targetJumperValue.Length == 0)
+                {
+                    JumperTargetValueTextBox.Text = "Random";
+                    return (byte?)null;
+                }
+                else return Convert.ToByte(targetJumperValue, 2);
+            }
             else
-                JumperTargetValueTextBox.Text = "ERROR";
+            {
+                JumperTargetValueTextBox.Text = "Random";
                 return (byte?)null;
+            }
         }
 
         private void BreakResistor_Click(object sender, RoutedEventArgs e)
