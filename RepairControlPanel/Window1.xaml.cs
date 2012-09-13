@@ -80,12 +80,12 @@ namespace RepairControlPanel
                 Connector.SendPing();
             }
             _consume = ((IEnumerable<UnitStatus>) StatusPanels).Sum(cnt => cnt.GetResistorVal());
-            UpdateEnergyLabel();
+//            UpdateEnergyLabel();
             interval++;
             if (interval > 2 * 60 * 5)
             {
                 interval = 0;
-                MakeKill();
+//                MakeKill();
             }
         }
 

@@ -139,8 +139,7 @@ namespace RepairControl
             buf[0] = _addr;
             buf[1] = Sender;
             buf[2] = _cmd;
-            if (CmdType == CommandType.Set)
-            {
+            if (CmdType == CommandType.Set){
                 buf[3] = _analog;
                 buf[4] = _digit;
                 buf[5] = _dific;
